@@ -37,8 +37,6 @@ function getCircleCircumference(radius) {
   return 2 * radius * Math.PI;
 }
 
-// console.log(getCircleCircumference(5));
-
 /**
  * Returns an average of two given numbers.
  *
@@ -52,9 +50,8 @@ function getCircleCircumference(radius) {
  *  -3, 3  => 0
  */
 function getAverage(value1, value2) {
-  return (value1 + value2) / 2;
+  return value1 / 2 + value2 / 2;
 }
-// console.log(getAverage(-3, 3));
 
 /**
  * Returns a distance between two points by cartesian coordinates.
@@ -76,8 +73,6 @@ function getDistanceBetweenPoints(x1, y1, x2, y2) {
   return Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
 }
 
-// console.log(getDistanceBetweenPoints(0, 0, 1, 0));
-
 /**
  * Returns a root of linear equation a*x + b = 0 given by coefficients a and b.
  *
@@ -94,8 +89,6 @@ function getLinearEquationRoot(a, b) {
   const r = -b / a;
   return r;
 }
-
-// console.log(getLinearEquationRoot(5, -10));
 
 /**
  * Returns an angle (in radians) between two vectors given by xi and yi,
@@ -115,8 +108,12 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (0,1)     => 0
  *   (0,1) (1,2)     => 0
  */
-function getAngleBetweenVectors(/* x1, y1, x2, y2 */) {
-  throw new Error('Not implemented');
+function getAngleBetweenVectors(x1, y1, x2, y2) {
+  const d = x1 * x2 + y1 * y2;
+  const normolizeOne = Math.sqrt(x1 ** 2 + y1 ** 2);
+  const normolizeTwo = Math.sqrt(x2 ** 2 + y2 ** 2);
+
+  return Math.acos(d / (normolizeOne * normolizeTwo));
 }
 
 /**
@@ -190,7 +187,8 @@ function getParallelepipedDiagonal(a, b, c) {
  *   1678, 3  => 2000
  */
 function roundToPowerOfTen(num, pow) {
-  return Math.round(num / Math.pow(10, pow)) * Math.pow(10, pow);
+  // return Math.round(num / Math.pow(10, pow)) * Math.pow(10, pow);
+  return Math.round(num / 10 ** pow) * 10 ** pow;
 }
 
 // console.log(roundToPowerOfTen(1234, 1));
@@ -220,7 +218,7 @@ function isPrime(n) {
   if (n === 2 || n === 3) return true;
 
   const res = [];
-  for (let i = 1; i <= n; i++) {
+  for (let i = 1; i <= n; i += 1) {
     if (n % i === 0) {
       res.push(true);
     }
@@ -245,8 +243,9 @@ function isPrime(n) {
  *   toNumber(42, 0) => 42
  *   toNumber(new Number(42), 0) => 42
  */
-function toNumber(/* value, def */) {
-  throw new Error('Not implemented');
+function toNumber(value, def) {
+  if (Number.isNaN(Number(value))) return def;
+  return Number(value);
 }
 
 module.exports = {
