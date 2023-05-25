@@ -72,9 +72,7 @@ function getSumBetweenNumbers(n1, n2) {
   let res = 0;
 
   for (let i = n1; i <= n2; i += 1) {
-    let cur = i;
-
-    res += cur;
+    res += i;
   }
 
   return res;
@@ -87,7 +85,7 @@ function getSumBetweenNumbers(n1, n2) {
  * @param {number} a
  * @param {number} b
  * @param {number} c
- * @return {bool}
+ * @return {boolean}
  *
  * @example:
  *   1,2,3    =>  false
@@ -96,7 +94,7 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,10,10 =>  true
  */
 function isTriangle(a, b, c) {
-  return a + b > c && a + c > b && c + b > a ? true : false;
+  return a + b > c && a + c > b && c + b > a;
 }
 
 /**
@@ -154,15 +152,18 @@ function doRectanglesOverlap(/* rect1, rect2 */) {
  *
  * @param {object} circle
  * @param {object} point
- * @return {bool}
+ * @return {boolean}
  *
  * @example:
  *   { center: { x:0, y:0 }, radius:10 },  { x:0, y:0 }     => true
  *   { center: { x:0, y:0 }, radius:10 },  { x:10, y:10 }   => false
  *
  */
-function isInsideCircle(/* circle, point */) {
-  throw new Error('Not implemented');
+function isInsideCircle(circle, point) {
+  const { x } = circle.center;
+  const { y } = circle.center;
+  const r = circle.radius;
+  return r ** 2 > (x - point.x) ** 2 + (y - point.y) ** 2;
 }
 
 /**
