@@ -183,8 +183,29 @@ function isInsideCircle(circle, point) {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-function findFirstSingleChar(/* str */) {
-  throw new Error('Not implemented');
+function findFirstSingleChar(str) {
+  const arr = str.split('');
+  const goRes = [];
+  const objCount = arr.reduce((acc, el) => {
+    if (acc[el]) {
+      acc[el] += 1;
+    } else {
+      acc[el] = 1;
+    }
+    return acc;
+  }, {});
+
+  Object.keys(objCount).forEach((item) => {
+    if (objCount[item] === 1) {
+      goRes.push(item);
+    }
+  });
+
+  if (goRes[0]) {
+    return goRes[0];
+  }
+
+  return null;
 }
 
 /**
@@ -285,23 +306,24 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
-
-  /* const arr = String(ccn).split('');
+function isCreditCardNumber(ccn) {
+  const arr = String(ccn).split('');
   let res = 0;
   let posEven = false;
 
   for (let i = arr.length - 1; i >= 0; i -= 1) {
     let current = Number(arr[i]);
-    if (posEven && current * 2 > 9) {
-      current -= 9;
+    if (posEven) {
+      current *= 2;
+      if (current > 9) {
+        current -= 9;
+      }
     }
     res += current;
     posEven = !posEven;
   }
 
-  return res % 10 === 0; */
+  return res % 10 === 0;
 }
 
 /**
@@ -346,8 +368,32 @@ function getDigitalRoot(num) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  if (str === '') return true;
+  const open = ['(', '[', '{', '<'];
+  const data = {
+    ')': '(',
+    ']': '[',
+    '}': '{',
+    '>': '<',
+  };
+  const stack = [];
+
+  for (let i = 0; i < str.length; i += 1) {
+    if (open.includes(str[i])) {
+      stack.push(str[i]);
+    } else if (data[str[i]] === stack[stack.length - 1]) {
+      stack.pop();
+    } else {
+      return false;
+    }
+  }
+
+  if (stack.length === 0) {
+    return true;
+  }
+
+  return false;
 }
 
 /**
