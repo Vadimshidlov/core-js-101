@@ -202,9 +202,9 @@ function getTail(arr, n) {
  *    +'30,31,32,33,34'
  */
 
-//  TODO_______________________________
-function toCsvText(/* arr */) {
-  throw new Error('Not implemented');
+function toCsvText(arr) {
+  return arr.map((item) => item.join(','))
+    .join('\n');
 }
 
 /**
@@ -274,7 +274,8 @@ function propagateItemsByPositionIndex(arr) {
 
   if (arr.length === 0) return [];
 
-  arr.map((el, i) => res.push(Array(i + 1).fill(el)));
+  arr.map((el, i) => res.push(Array(i + 1)
+    .fill(el)));
 
   return res.flat(Infinity);
 }
@@ -397,8 +398,8 @@ function getFalsyValuesCount(arr) {
  *    [ null, undefined, null ], null => 2
  *    [ true, 0, 1, 'true' ], true => 1
  */
-function findAllOccurrences(/* arr, item */) {
-  throw new Error('Not implemented');
+function findAllOccurrences(arr, search) {
+  return arr.reduce((acc, item) => acc + (item === search), 0);
 }
 
 /**
@@ -474,7 +475,8 @@ function sortCitiesArray(arr) {
 function getIdentityMatrix(n) {
   const arr = Array(n)
     .fill()
-    .map(() => Array(n).fill(0));
+    .map(() => Array(n)
+      .fill(0));
 
   return arr.reduce((acc, el, i) => {
     const cur = el;
@@ -547,7 +549,7 @@ function distinct(arr) {
  *   Map {
  *    "Belarus" => ["Brest", "Grodno", "Minsk"],
  *    "Russia" => ["Omsk", "Samara"],
- *    "Poland" => ["Lodz"]
+ *    "Poland" => ['Lodz']
  *   }
  */
 function group(array, keySelector, valueSelector) {
@@ -560,8 +562,10 @@ function group(array, keySelector, valueSelector) {
   });
 
   const res = new Map();
-  Object.keys(arrCountries).map((el) => res.set(el, []));
-  array.map((el) => res.get(keySelector(el)).push(valueSelector(el)));
+  Object.keys(arrCountries)
+    .map((el) => res.set(el, []));
+  array.map((el) => res.get(keySelector(el))
+    .push(valueSelector(el)));
   return res;
 }
 
@@ -621,8 +625,16 @@ function getElementByIndexes(arr, indexes) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  const middle = Math.floor(arr.length / 2);
+  if (arr.length % 2 === 0) {
+    return [...arr.slice(middle, arr.length), ...arr.slice(0, middle)];
+  }
+  return [
+    ...arr.slice(middle + 1, arr.length),
+    arr[middle],
+    ...arr.slice(0, middle),
+  ];
 }
 
 module.exports = {
