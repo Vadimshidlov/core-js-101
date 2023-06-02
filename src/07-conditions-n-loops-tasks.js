@@ -195,11 +195,12 @@ function findFirstSingleChar(str) {
     return acc;
   }, {});
 
-  Object.keys(objCount).forEach((item) => {
-    if (objCount[item] === 1) {
-      goRes.push(item);
-    }
-  });
+  Object.keys(objCount)
+    .forEach((item) => {
+      if (objCount[item] === 1) {
+        goRes.push(item);
+      }
+    });
 
   if (goRes[0]) {
     return goRes[0];
@@ -263,10 +264,12 @@ function reverseString(str) {
   const res = [];
   for (let i = 0; i < arr.length; i += 1) {
     const current = arr[i].split('');
-    res.push(current.reverse().join(''));
+    res.push(current.reverse()
+      .join(''));
   }
 
-  return res.reverse().join(' ');
+  return res.reverse()
+    .join(' ');
 }
 
 /**
@@ -282,8 +285,10 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
-  const current = String(num).split('');
-  return current.reverse().join('');
+  const current = String(num)
+    .split('');
+  return current.reverse()
+    .join('');
 }
 
 /**
@@ -307,7 +312,8 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
-  const arr = String(ccn).split('');
+  const arr = String(ccn)
+    .split('');
   let res = 0;
   let posEven = false;
 
@@ -341,7 +347,8 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-  const current = String(num).split('');
+  const current = String(num)
+    .split('');
   const res = current.reduce((acc, el) => acc + Number(el), 0);
 
   return String(res).length > 1 ? getDigitalRoot(res) : res;
@@ -488,8 +495,52 @@ function getMatrixProduct(/* m1, m2 */) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  if (position[0][0] === position[1][0] && position[1][0] === position[2][0]) {
+    if (position[1][0]) {
+      return position[1][0];
+    }
+  }
+
+  if (position[0][0] === position[0][1] && position[0][1] === position[0][2]) {
+    if (position[0][1]) {
+      return position[0][1];
+    }
+  }
+
+  if (position[0][2] === position[1][2] && position[1][2] === position[2][2]) {
+    if (position[1][2]) {
+      return position[1][2];
+    }
+  }
+  if (position[2][0] === position[2][1] && position[2][1] === position[2][2]) {
+    if (position[2][1]) {
+      return position[2][1];
+    }
+  }
+
+  if (position[0][1] === position[1][1] && position[1][1] === position[2][1]) {
+    if (position[1][1]) {
+      return position[1][1];
+    }
+  }
+  if (position[1][0] === position[1][1] && position[1][1] === position[1][2]) {
+    if (position[1][1]) {
+      return position[1][1];
+    }
+  }
+  if (position[0][0] === position[1][1] && position[1][1] === position[2][2]) {
+    if (position[1][1]) {
+      return position[1][1];
+    }
+  }
+  if (position[2][0] === position[1][1] && position[1][1] === position[0][2]) {
+    if (position[1][1]) {
+      return position[1][1];
+    }
+  }
+
+  return undefined;
 }
 
 module.exports = {
