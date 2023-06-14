@@ -203,8 +203,7 @@ function getTail(arr, n) {
  */
 
 function toCsvText(arr) {
-  return arr.map((item) => item.join(','))
-    .join('\n');
+  return arr.map((item) => item.join(',')).join('\n');
 }
 
 /**
@@ -236,8 +235,18 @@ function toArrayOfSquares(arr) {
  *   [ 0, 0, 0, 0, 0]         => [ 0, 0, 0, 0, 0]
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
-function getMovingSum(/* arr */) {
-  throw new Error('Not implemented');
+function getMovingSum(arr) {
+  return arr.reduce((accum, item, index) => {
+    // console.log(arr[index]);
+    if (index === 0) {
+      accum.push(arr[0]);
+      return accum;
+    }
+
+    accum.push(arr[index] + accum[index - 1]);
+
+    return accum;
+  }, []);
 }
 
 /**
@@ -274,8 +283,7 @@ function propagateItemsByPositionIndex(arr) {
 
   if (arr.length === 0) return [];
 
-  arr.map((el, i) => res.push(Array(i + 1)
-    .fill(el)));
+  arr.map((el, i) => res.push(Array(i + 1).fill(el)));
 
   return res.flat(Infinity);
 }
@@ -475,8 +483,7 @@ function sortCitiesArray(arr) {
 function getIdentityMatrix(n) {
   const arr = Array(n)
     .fill()
-    .map(() => Array(n)
-      .fill(0));
+    .map(() => Array(n).fill(0));
 
   return arr.reduce((acc, el, i) => {
     const cur = el;
@@ -562,10 +569,8 @@ function group(array, keySelector, valueSelector) {
   });
 
   const res = new Map();
-  Object.keys(arrCountries)
-    .map((el) => res.set(el, []));
-  array.map((el) => res.get(keySelector(el))
-    .push(valueSelector(el)));
+  Object.keys(arrCountries).map((el) => res.set(el, []));
+  array.map((el) => res.get(keySelector(el)).push(valueSelector(el)));
   return res;
 }
 
